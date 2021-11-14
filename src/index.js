@@ -31,12 +31,32 @@ function addOneDogToBar(dogObj){
 
 function showOneDog(dogObj){
     console.log(dogObj)
+    details.innerHTML = ''
+    const dogDiv = document.createElement('div')
+    dogDiv.innerHTML = `
+    <img src=${dogObj.image}>
+    <h2>${dogObj.name}</h2>`
+    const pupBtn = document.createElement('button')
+    // let str
+    // if(dogObj.isGoodDog){
+    //     str = 'Good Dog'
+    // } else {
+    //     str = 'Bad Dog'
+    // }
+    pupBtn.textContent = ((dogObj.isGoodDog) ? "Good Dog" : "Bad Dog")
+    pupBtn.addEventListener('click', () => togglePupButton(pupBtn))
+    details.append(dogDiv, pupBtn)
 }
 
 //Event handlers
 function handleSpanClick(event){
     const id = event.target.dataset.id
     getOneDog(id).then(showOneDog)
+}
+
+function togglePupButton(pupButton){
+    pupButton.textContent = pupButton.textContent.includes("Good") ? "Bad Dog" : "Good Dog"
+
 }
 
 //initialize
